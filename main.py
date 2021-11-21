@@ -25,11 +25,20 @@
 import pandas
 
 data = pandas.read_csv("nato_phonetic_alphabet.csv")
-dictionary = {rows.letter:rows.code for (index, rows) in data.iterrows()}
+dictionary = {rows.letter: rows.code for (index, rows) in data.iterrows()}
 print(dictionary)
 
-#TODO 2. Create a list of the phonetic code words from a word that the user inputs.
-user_input = input("Enter a word: ").upper()
-result = [dictionary[letter] for letter in user_input]
-print(result)
 
+# TODO 2. Create a list of the phonetic code words from a word that the user inputs.
+def generate_phoetic():
+    user_input = input("Enter a word: ").upper()
+    try:
+        result = [dictionary[letter] for letter in user_input]
+    except KeyError:
+        print("Sorry, only letters in the alphabet please.")
+        generate_phoetic()
+    else:
+        print(result)
+
+
+generate_phoetic()
